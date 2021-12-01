@@ -36,6 +36,8 @@ int binary_full_check(const binary_tree_t *tree)
 		return (-1);
 	if ((tree->left && !tree->right) || (tree->right && !tree->left))
 		return (-1);
+	else if (!tree->left && !tree->right && !tree->parent)
+		return (-1);
 	else
 		return (1);
 	c *= binary_full_check(tree->left);
