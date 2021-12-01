@@ -8,18 +8,9 @@
  */
 int binary_tree_is_full(const binary_tree_t *tree)
 {
-	int flag1;
-	int flag2;
-
 	if (tree == NULL)
 		return (0);
-	flag1 = binary_full_check(tree->left);
-	flag2 = binary_full_check(tree->right);
-	if (flag1 < 0 || flag2 < 0)
-		return (0);
-	else
-		return (1);
-
+	return (binary_full_check(tree));
 }
 /**
  * binary_full_check - function checks if tree is full
@@ -29,17 +20,10 @@ int binary_tree_is_full(const binary_tree_t *tree)
  */
 int binary_full_check(const binary_tree_t *tree)
 {
-	int c = 1;
-	int c1 = 1;
 
-	if (tree == NULL)
-		return (-1);
-	if ((tree->left && !tree->right) || (tree->right && !tree->left))
-		return (-1);
-	else if (!tree->left && !tree->right && !tree->parent)
-		return (-1);
-	else
+	if (!tree->left && !tree->right)
 		return (1);
-	c *= binary_full_check(tree->left);
-	c1 *= binary_full_check(tree->right);
+	else if (tree->left && tree->right)
+		return (binary_full_check(tree->left) && binary_full_check(tree->right));
+	return (0);
 }
